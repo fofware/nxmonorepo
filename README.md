@@ -1,0 +1,2 @@
+# nxmonorepo
+Aprendiendo nuevas cosas
