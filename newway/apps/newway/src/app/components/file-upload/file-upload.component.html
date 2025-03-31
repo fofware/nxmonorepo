@@ -1,0 +1,41 @@
+<div class="file-upload-container">
+  @if (!fileBase64()) {
+    <div class="upload-area">
+      <input
+        #fileInput
+        type="file"
+        id="file-upload"
+        (change)="onFileSelected($event)"
+        [disabled]="isLoading()"
+        class="file-input"
+      >
+      <label for="file-upload" class="upload-label">
+        @if (!isLoading()) {
+          <span>Seleccionar archivo</span>
+        } @else {
+          <span>Procesando...</span>
+        }
+      </label>
+    </div>
+  }
+
+  @if (fileBase64()) {
+    <div class="file-info">
+      <div class="file-name">Archivo: {{ fileName() }}</div>
+      <pre>
+        <code>
+          {{ fileBase64() | slice:0:100 }}...
+        </code>
+      </pre>
+      @if (fileBase64()?.startsWith('data:image')) {
+        <div class="preview">
+          <img [src]="fileBase64()" alt="Vista previa" class="image-preview">
+        </div>
+      }
+
+      <div class="actions">
+        <button (click)="clearFile()" class="clear-button">Eliminar</button>
+      </div>
+    </div>
+  }
+</div>
